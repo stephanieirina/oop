@@ -4,11 +4,12 @@
  * @version 1.0.0
  * @package models
  */
-export class ProductModel {
+//abstract: class ne peut être instancier. 
+export abstract class ProductModel {
     /**
      * Name of the product (i.e :Lait, farine, oeuf...) instance de class
      */
-    private name: string;
+    protected name: string;
     /**
      * @var string
      */
@@ -26,7 +27,7 @@ export class ProductModel {
         return this.name.toUpperCase();
         
     } 
-     private baseUnit : string; // public: niveau d'encapsulation , determine que l'attribut est accessible dans un autre fichier ex.main
+     protected baseUnit : string; // public: niveau d'encapsulation , determine que l'attribut est accessible dans un autre fichier ex.main
     
     
     public setBaseUnit(baseUnit : string) : void {
@@ -43,7 +44,7 @@ export class ProductModel {
     }
 
    
-    private price : number;
+    protected price : number;
     public setPrice(price : number) {
         return this.price = price;
     }
@@ -60,14 +61,14 @@ export class ProductModel {
      */
     
 
-    private targetQuantity : number;
+    protected targetQuantity : number;
     public setTargetQuantity(targetQuantity: number) {
         return this.targetQuantity = targetQuantity;
     }
     public getTargetQuantity() : number {
         return this.targetQuantity;
     }
-    private strategy : number;
+    protected strategy : number;
     public setStrategy(strategy: number) : void {
         if (strategy> 0 && strategy <= 3) {
             this.strategy = strategy;
@@ -75,7 +76,20 @@ export class ProductModel {
             this.strategy = 1; //fallback
         }
     }
-    
+
+    public setQuantity (targetQuantity: number): void {
+        this.targetQuantity=targetQuantity
+    }
+    public getQuantity (): number {
+        return this.targetQuantity
+    } 
+    protected quantityUnit: number;
+    public setQuantityUnit(quantityUnit: number){
+        return this.quantityUnit = quantityUnit;
+    }
+
+
+
     public toString(): string {
         //toString pour afficher quelque chose
         //  if(type == 1){
@@ -88,7 +102,7 @@ export class ProductModel {
             return this.name + ' [ ' + this.baseUnit +' ] ';
             break
             case 3: //name + baseunit + price
-            return this.name + ' [ ' + this.baseUnit + ' ] [ ' + this.price +' ] '; 
+            return this.name + ' [ ' + this.baseUnit + ' ] [ ' + this.price +' ] ' ; 
             break
         }
           }

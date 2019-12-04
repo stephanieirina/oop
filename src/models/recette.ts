@@ -1,25 +1,38 @@
-import { ProductModel } from "./product-model";
 
-export class Recette{ 
-    private ingredients: Array<ProductModel> = new Array<ProductModel>();
+import { QuantityProduct } from "./quantity-products";
+
+export class Recette {
+    private ingredients: Array<QuantityProduct> = new Array<QuantityProduct>();
     private title: string;
+    private quantity: number =1;
+    private price: number =0;
 
     public constructor(title: string) {
         this.title = title;
 
     }
-    public addProduct(product : ProductModel): void{
-        this.ingredients.push(product); 
+    public setQuantity(quantity: number): void{
+        this.quantity = quantity;
+    }
+
+    public addProduct(product: QuantityProduct): void {
+        product.setUnitPrice();
+        console.log (`Prix pour ${product.getName()} : ${product.getUnitPrice()}`);
+        this.price += product.getUnitPrice();
+        this.ingredients.push(product);
     }
 
     public toString(): string {
         let theRecette: string = ' La recette des ' + this.title + '\n';
         //loop over ingredients array
-        this.ingredients.forEach((value: ProductModel) => { //polymorphisme ie même nom de methode mais différentes fonctions; 
+        this.ingredients.forEach((value: QuantityProduct) => { //polymorphisme ie même nom de methode mais différentes fonctions; 
             //je parcours le tableau des ingrédients, pour chaque éléments que je trouve dedans j'utilise la methode tostring.
             theRecette += value.toString() + '\n';
             //idem the Recette = the Recette + value.toString()
-        })
-        return theRecette; 
+        });
+        const unitPrice = this.price / this.quantity;
+
+        theRecette += `Cout de production : ${unitPrice}`;
+        return theRecette;
     }
 }
