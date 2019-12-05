@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<!-- Balise racine du document html-->
+
+<head>
+    <!-- informations à destination du navigateur ie encodage des fichiers-->
+    <meta charset="utf-8">
+    <title>
+        Mes recettes de cuisine
+    </title>
+    <!-- stylesheets-->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+        <!-- Add js sources-->
+        <script src="./dist/js/app.chunk.js"></script>
+        <script src="./dist/js/app.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="row">
+            <!-- element qui va contenir des balises-->
+            <h1 class="col-12"> Receipe Rentability</h1> <!-- balise -premier titre visible-->
+
+        </header>
+        <main class="row">
+            <section id="receipe-forms" class="col-lg-4 col-12">
+                <!-- First: receipe creation form-->
+                <form id="receipe-form">
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" name="receipe-title" id="receipe-title" placeholder="Receipe title..."
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="receipe-quantity" id="receipe-quantity" value="0" min="0"
+                                max="50" step="5" placeholder="Receipe quantity..." class="form-control">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="button-group float-right">
+                            <button type="button" name="create-receipe" id="create-receipe"
+                                class="btn btn-outline-success">
+                                Créer
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+                <!-- Ingredient form-->
+                <form id="ingredient-form" class="hidden-form">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" name="ingredient-title" id="ingredient-title"
+                                    placeholder="Ingredient name..." class="form-control">
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col">
+                                <input type="number" name="ingredient-quantity" id="ingredient-quantity" min="1"
+                                    placeholder="Ingredient quantity..." class="form-control"> </div>
+                            <div class="col">
+                                <select class="form-control" name="target-unit" id="target-unit" size="1">
+                                    <option value="" disabled selected>Selectionnez...</option>
+                                    <option value="g"> Grammes</option>
+                                    <option value="cl"> Centilitres</option>
+                                    <option value="unité"> Unité</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Ingredient price..."
+                                        aria-label="Ingredient Price" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">&euro;</span>
+                                        <!-- pop up-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <select class="form-control" name="base-unit" id="base-unit" size="1">
+                                    <option value="" disabled selected>Prix par...</option>
+                                    <option value="kg"> Kilogrammes</option>
+                                    <option value="l"> Litres</option>
+                                    <option value="unité"> Unité</option>
+                                    <option value="cl"> Centilitres</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <div class="row float-right">
+                            <div class="col">
+                                <label for="unit-quanity"> Given Quantity</label>
+                                <input type="number" name="unit-quantity" id="unit-quantity" value="1"
+                                    class="form-control">
+                                </col>
+
+                            </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="button-group float-left">
+                            <button type="button" name="add-ingredient" id="add-ingredient" class="btn btn-primary">
+                                Ajouter et continuer
+                            </button>
+                        </div>
+                        <div class="button-group float-right">
+                            <button type="button" name="add-finish" id="add-finish" class="btn btn-primary">
+                                Ajouter et terminer
+                            </button>
+                        </div>
+                    </fieldset>
+
+                </form>
+            </section>
+            <aside id="receipe-results" class="col-lg-8 col-12">
+                <!-- Results of the receipe-->
+                <table class="table table-condensed table-striped">
+                    <thead>
+                        <!-- Header of table-->
+                        <tr>
+                            <!-- Table row-->
+                            <th class="form-check">
+                                <input class="form-check-input" type="checkbox" name="select-all-ingredients"
+                                    id="select-all">
+
+                            </th><!-- Header Cell-->
+                            <th>Ingrédient</th>
+                            <th>Quantité</th>
+                            <th>Coût unitaire (&euro;)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows of the table-->
+                        <tr>
+                            <td class="form-check">
+                                <!-- Table divider-->
+                                <input class="form-check-input" type="checkbox" name="select-farine" id="select-farine">
+                            </td>
+                            <td>Farine</td>
+                            <td> 300g</td>
+                            <td>0.54&euro;</td>
+                        </tr>
+                        <tr>
+                            <td class="form-check">
+                                <!-- Table divider-->
+                                <input class="form-check-input" type="checkbox" name="select-farine" id="select-farine">
+                            </td>
+                            <td>Lait</td>
+                            <td> 60cl</td>
+                            <td>0.22&euro;</td>
+                        </tr>
+                        <tr>
+                            <td class="form-check">
+                                <!-- Table divider-->
+                                <input class="form-check-input" type="checkbox" name="select-farine" id="select-farine">
+                            </td>
+                            <td>Oeufs</td>
+                            <td> 3</td>
+                            <td>0.66&euro;</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <!-- Footer of the table-->
+                        <tr>
+                            <td colspan="3"> Receipe total: </td>
+
+                            <td class="total-receipe">
+                                99.99€
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"> Cost for a piece of receipe: </td>
+
+                            <td class="total-receipe">
+                                99.99€
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </aside>
+        </main>
+        <footer class="row">
+            <ul class="list-unstyled">
+                <!-- Conteneur de lignes de liste-->
+                <li>
+                    <a href="./legals.html" title="Legal mentions" target="_self">
+                        Mentions légales
+                    </a>
+                </li>
+                <li>
+                    <a href="./cgu.html" title="Condition Générales d'Utilisation" target="_self">
+                        <abbr title="Conditions Générales d'Utilisation">
+                            CGU</abbr></a></li>
+                <li>
+                    <a href="https://www.aelio.fr" target="_new" title="Organisme de formation">
+                        &copy; Aelion 2019</a></li>
+                <li>
+                    <a href="tel:06000000">
+                        <span class="icon-phone"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mail:lk@mdl.com">
+                        <span class="icon-envelop"></span>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+    </div>
+
+</body>
+
+</html>
