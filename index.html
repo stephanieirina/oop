@@ -12,16 +12,18 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./node_modules/animate.css/animate.min.css">
         <!-- Add js sources-->
         <script src="./dist/js/app.chunk.js"></script>
         <script src="./dist/js/app.js"></script>
+    
 </head>
 
 <body>
     <div class="container">
         <header class="row">
             <!-- element qui va contenir des balises-->
-            <h1 class="col-12"> Receipe Rentability</h1> <!-- balise -premier titre visible-->
+            <h1 class="col-12"> Recettes</h1> <!-- balise -premier titre visible-->
 
         </header>
         <main class="row">
@@ -34,13 +36,13 @@
                                 class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="number" name="receipe-quantity" id="receipe-quantity" value="0" min="0"
+                            <input type="number" name="receipe-quantity" id="receipe-quantity" min="0"
                                 max="50" step="5" placeholder="Receipe quantity..." class="form-control">
                         </div>
                     </fieldset>
                     <fieldset>
                         <div class="button-group float-right">
-                            <button type="button" name="create-receipe" id="create-receipe"
+                            <button type="button" name="create-receipe" id="create-receipe" disabled 
                                 class="btn btn-outline-success">
                                 Créer
                             </button>
@@ -49,7 +51,10 @@
                 </form>
                 <!-- Ingredient form-->
                 <form id="ingredient-form" class="hidden-form">
-                    <fieldset>
+                    <fieldset> <!-- groupe de champ-->
+                        <legend>
+                            Please enter ingredient for <span> </span> <!-- span pour isoler une partie de texte dans un autre texte-->
+                        </legend>
                         <div class="row">
                             <div class="col">
                                 <input type="text" name="ingredient-title" id="ingredient-title"
@@ -72,7 +77,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Ingredient price..."
+                                    <input type="text" class="form-control" id="ingredient-price" placeholder="Ingredient price..."
                                         aria-label="Ingredient Price" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="basic-addon2">&euro;</span>
@@ -103,12 +108,12 @@
                     </fieldset>
                     <fieldset>
                         <div class="button-group float-left">
-                            <button type="button" name="add-ingredient" id="add-ingredient" class="btn btn-primary">
+                            <button type="button" name="add-and-next" id="add-and-next" class="btn btn-primary">
                                 Ajouter et continuer
                             </button>
                         </div>
                         <div class="button-group float-right">
-                            <button type="button" name="add-finish" id="add-finish" class="btn btn-primary">
+                            <button type="button" name="add-and-close" id="add-and-close" class="btn btn-primary">
                                 Ajouter et terminer
                             </button>
                         </div>

@@ -1,5 +1,6 @@
 import *as $ from 'jquery'; 
 import { ReceipeFormModule } from './modules/receipe-form-module';
+import { IngredientFormModule } from './modules/ingredient-form-module';
 // import de toutes les fonctionnalités de Jquery
 /**
  * @name Main
@@ -18,6 +19,7 @@ export class Main{
     public constructor(){
        // $('h1').html('Hello from jQuery'); 
        new ReceipeFormModule();
+       new IngredientFormModule();
     }
 }
 
