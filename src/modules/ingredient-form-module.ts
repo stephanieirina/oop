@@ -3,6 +3,7 @@ import { ReceipeFormModule } from './receipe-form-module';
 import { on } from 'cluster';
 import { QuantityProduct } from './../models/quantity-products';
 import { Recette } from './../models/recette';
+import { ModalModule } from './modal-modules';
 export class IngredientFormModule {
     //defini l'objet form du document html donc this.form la referrence au formulaire
     private form: JQuery = $('#ingredient-form');
@@ -106,15 +107,16 @@ export class IngredientFormModule {
 
         //Add row to tbody
         $('aside#receipe-results table tbody').append(tableRow); 
-        //update totals
+        /** //update totals
         $('#total-receipe').html(this.receipe.getRecette().getPrice().toString());
-        $('#one-piece-total').html(this.receipe.getRecette().getUnitPrice().toString()); 
+        $('#one-piece-total').html(this.receipe.getRecette().getUnitPrice().toString());*/ 
     }
     
     private addIngredientAndStop(event: any): void {
        //add row
        this.addRow();
-
+        const modalModule: ModalModule = (new ModalModule(this)); 
+        modalModule.show(); 
         // Reset form...
         this.resetForm();
 
