@@ -113,9 +113,9 @@ export class IngredientFormModule {
 
         //Add row to tbody
         $('aside#receipe-results table tbody').append(tableRow); 
-        /** //update totals
+        //update totals
         $('#total-receipe').html(this.receipe.getRecette().getPrice().toString());
-        $('#one-piece-total').html(this.receipe.getRecette().getUnitPrice().toString());*/ 
+        $('#one-piece-total').html(this.receipe.getRecette().getUnitPrice().toString());
     }
     
     private addIngredientAndStop(event: any): void {

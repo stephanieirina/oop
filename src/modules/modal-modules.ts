@@ -34,7 +34,9 @@ export class ModalModule{
 
     }
     private noButton(event: any): void {
-       this.hide();
+        $('#receipe-results table tbody tr').remove();
+        $('.total-receipe').html('0€');
+        this.hide();
     }
     private yesButton(event: any): void {
         const receipes: string = localStorage.getItem('receipes'); //localstorage native object of html5 one url; navigateur
@@ -50,6 +52,9 @@ export class ModalModule{
             localStorage.setItem('receipes', JSON.stringify(updateReceipes));
            
         }
+        //clear tr in table..
+        $('#receipe-results table tbody tr').remove();
+        $('.total-receipe').html('0€');
         this.hide(); 
     }
 
