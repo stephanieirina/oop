@@ -34,10 +34,23 @@ export class ModalModule{
 
     }
     private noButton(event: any): void {
-       console.log('click on no button');
+       this.hide();
     }
-    private  yesButton(event: any): void {
-        console.log('click on yes button'); 
+    private yesButton(event: any): void {
+        const receipes: string = localStorage.getItem('receipes'); //localstorage native object of html5 one url; navigateur
+        if(receipes != null){
+            //receipes key in locals exists
+           const existingReceipes: Array<any>= JSON.parse(receipes)
+           existingReceipes.push(this.form.getReceipe());
+           localStorage.setItem('receipes', JSON.stringify(existingReceipes));
+        } else {
+            const updateReceipes: Array<any>=[
+                this.form.getReceipe()
+            ];
+            localStorage.setItem('receipes', JSON.stringify(updateReceipes));
+           
+        }
+        this.hide(); 
     }
 
 

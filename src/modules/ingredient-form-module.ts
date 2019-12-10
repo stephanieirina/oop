@@ -36,6 +36,9 @@ export class IngredientFormModule {
     public getReceipeTitle(): string{
         return this.receipe.getRecette().getTitle();   //ofuscation to hide the origin of the information
     }
+    public getReceipe(): Recette{
+        return this.receipe.getRecette();
+    }
  
     private setEventHandlers() {
         this.form.on(
