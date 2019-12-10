@@ -7,6 +7,10 @@ export class Recette {
     private quantity: number =1;
     private price: number =0;
 
+    public getTitle(): string{
+        return this.title;
+    }
+
     public constructor(title: string) {
         this.title = title;
 

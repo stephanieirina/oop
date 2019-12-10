@@ -114,13 +114,17 @@ export class IngredientFormModule {
     private addIngredientAndStop(event: any): void {
        //add row
        this.addRow();
+
         // Reset form...
         this.resetForm();
 
         // Hey Dude, did you think at the span of the legend ?
         // Sure not Hobiwan...
         this.form.children('fieldset').children('legend').children('span').html('');
-        
+        //Call the outer modal to be hidden
+        $('.outer-modal .content strong').html(this.receipe.getRecette().getTitle()); 
+        $('.outer-modal').removeClass('hidden');
+
         this.form
             .removeClass('fadeInUp')
             .removeClass('animated')
@@ -130,8 +134,6 @@ export class IngredientFormModule {
             this.form.removeClass('animated').removeClass('fadeOutDown');
             this.form.addClass('hidden-form');
         }, 1500);
-         //add a row
-         this.addRow();
         // Then reset the previous form... but... don't forget you got a receipe-form-module...
         // So use it
         ReceipeFormModule.resetForm();
