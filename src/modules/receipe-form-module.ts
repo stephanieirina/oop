@@ -1,6 +1,14 @@
 import * as $ from 'jquery';
+import { Recette } from './../models/recette';
 
 export class ReceipeFormModule {
+    private recette: Recette;
+
+    public getRecette(): Recette{
+        return this.recette;
+    }
+
+
     public constructor() {
         this.setCreateButtonHandler();
         this.setFormKeyupHandler();
@@ -48,6 +56,8 @@ export class ReceipeFormModule {
             $('#ingredient-form fieldset legend span').html($('#receipe-title').val().toString());
             //have to remove the hidden form
             $('#ingredient-form').removeClass('hidden-form').addClass('animated swing');
+            this.recette= new Recette($('#receipe-title').val().toString()); //ie portée de la recette stop à la sortie de la méthode
+            this.recette.setQuantity(parseInt($('#receipe-quantity').val().toString()));
             // "disabled" the form components: fields and button
             $('#create-receipe').attr('disabled', 'disabled');
             $('#receipe-title').attr('disabled', 'disabled');

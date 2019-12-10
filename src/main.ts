@@ -18,8 +18,8 @@ import { IngredientFormModule } from './modules/ingredient-form-module';
 export class Main{
     public constructor(){
        // $('h1').html('Hello from jQuery'); 
-       new ReceipeFormModule();
-       new IngredientFormModule();
+       const receipe: ReceipeFormModule = new ReceipeFormModule();
+       new IngredientFormModule(receipe);
     }
 }
 

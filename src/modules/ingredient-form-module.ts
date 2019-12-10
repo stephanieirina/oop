@@ -2,6 +2,7 @@ import * as $ from 'jquery';
 import { ReceipeFormModule } from './receipe-form-module';
 import { on } from 'cluster';
 import { QuantityProduct } from './../models/quantity-products';
+import { Recette } from './../models/recette';
 export class IngredientFormModule {
     //defini l'objet form du document html donc this.form la referrence au formulaire
     private form: JQuery = $('#ingredient-form');
@@ -11,10 +12,11 @@ export class IngredientFormModule {
     private addAndStop: JQuery = $('#add-and-close');
 
     private checkAll: JQuery= $('#select-all');
+    private receipe: ReceipeFormModule; 
 
-    
-
-    public constructor() {
+    public constructor(receipe: ReceipeFormModule) {
+        // dependancy injection: ingredient depends on receipe
+        this.receipe = receipe; 
         // this.fields.push($('#ingredient-title'));
         //this.fields.push($('#ingredient-quantity'));
         //this.fields.push($('#ingredient-price'));
@@ -24,6 +26,10 @@ export class IngredientFormModule {
         this.getFormFields();
         //Sets the event handlers
         this.setEventHandlers();
+      //  this.recette = new Recette($('#receipe-title').val().toString());   // don't work
+      //  this.recette.setQuantity(parseInt($('#receipe-quantity').val().toString()));   // don't work
+
+       // console.log('La recette :' + JSON.stringify(this.recette));
 
     }
  
@@ -100,6 +106,9 @@ export class IngredientFormModule {
 
         //Add row to tbody
         $('aside#receipe-results table tbody').append(tableRow); 
+        //update totals
+        $('#total-receipe').html(this.receipe.getRecette().getPrice().toString());
+        $('#one-piece-total').html(this.receipe.getRecette().getUnitPrice().toString()); 
     }
     
     private addIngredientAndStop(event: any): void {
@@ -163,10 +172,17 @@ private createObject(): QuantityProduct{
     ingredient.setUnit($('#target-unit').children('option:selected').val().toString()); 
     ingredient.setQuantityUnit(parseInt($('#unit-quantity').val().toString())); 
 
-    console.log(JSON.stringify(ingredient));
+    
+   //add ingredient to receipe
+   // this.recette.addProduct(ingredient); //don't work 
+    //DI using: from ReceipeFormModule, gets Recette object and push ingredient
+   this.receipe.getRecette().addProduct(ingredient); // step 1
+   console.log('receipe update '+ JSON.stringify(this.receipe.getRecette()));
 
     //compute the unit price
-    ingredient.setUnitPrice(); 
+   // ingredient.setUnitPrice(); //step 2
+
+ 
     return ingredient;
 
 }

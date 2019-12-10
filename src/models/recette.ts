@@ -11,6 +11,17 @@ export class Recette {
         this.title = title;
 
     }
+    public getPrice(): number {
+        return this.price;
+
+    }
+
+    private unitPrice: number;
+    public getUnitPrice(): number {
+        return this.unitPrice;
+        }
+
+
     public setQuantity(quantity: number): void{
         this.quantity = quantity;
     }
@@ -20,6 +31,7 @@ export class Recette {
         console.log (`Prix pour ${product.getName()} : ${product.getUnitPrice()}`);
         this.price += product.getUnitPrice();
         this.ingredients.push(product);
+        this.unitPrice = this.price/this.quantity; 
     }
 
     public toString(): string {
