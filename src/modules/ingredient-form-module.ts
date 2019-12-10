@@ -33,6 +33,9 @@ export class IngredientFormModule {
        // console.log('La recette :' + JSON.stringify(this.recette));
 
     }
+    public getReceipeTitle(): string{
+        return this.receipe.getRecette().getTitle();   //ofuscation to hide the origin of the information
+    }
  
     private setEventHandlers() {
         this.form.on(
@@ -124,8 +127,8 @@ export class IngredientFormModule {
         // Sure not Hobiwan...
         this.form.children('fieldset').children('legend').children('span').html('');
         //Call the outer modal to be hidden
-        $('.outer-modal .content strong').html(this.receipe.getRecette().getTitle()); 
-        $('.outer-modal').removeClass('hidden');
+       /**  $('.outer-modal .content strong').html(this.receipe.getRecette().getTitle()); 
+        $('.outer-modal').removeClass('hidden');*/
 
         this.form
             .removeClass('fadeInUp')

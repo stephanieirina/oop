@@ -7,7 +7,7 @@ export class ModalModule{
 
     public constructor(form: IngredientFormModule){
         this.form = form; 
-        $('.outer-modal strong').html('le titre de la recette'); 
+        $('.outer-modal strong').html(this.form.getReceipeTitle()); 
 
         this.setEventHandlers(); 
     
