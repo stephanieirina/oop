@@ -139,49 +139,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Rows of the table-->
-                        <tr>
-                            <td class="form-check">
-                                <!-- Table divider-->
-                                <input class="form-check-input" type="checkbox" name="select-farine" id="select-farine">
-                            </td>
-                            <td>Farine</td>
-                            <td> 300g</td>
-                            <td>0.54&euro;</td>
-                        </tr>
-                        <tr>
-                            <td class="form-check">
-                                <!-- Table divider-->
-                                <input class="form-check-input" type="checkbox" name="select-farine" id="select-farine">
-                            </td>
-                            <td>Lait</td>
-                            <td> 60cl</td>
-                            <td>0.22&euro;</td>
-                        </tr>
-                        <tr>
-                            <td class="form-check">
-                                <!-- Table divider-->
-                                <input class="form-check-input" type="checkbox" name="select-farine" id="select-farine">
-                            </td>
-                            <td>Oeufs</td>
-                            <td> 3</td>
-                            <td>0.66&euro;</td>
-                        </tr>
+                        <!-- Rows of the table, dynamically hydrated-->
+                       
                     </tbody>
                     <tfoot>
                         <!-- Footer of the table-->
                         <tr>
                             <td colspan="3"> Receipe total: </td>
 
-                            <td class="total-receipe">
-                                99.99€
+                            <td class="total-receipe" id="total-receipe">
+                                0€
                             </td>
                         </tr>
                         <tr>
                             <td colspan="3"> Cost for a piece of receipe: </td>
 
-                            <td class="total-receipe">
-                                99.99€
+                            <td class="total-receipe" id="one-piece-total">
+                                0€
                             </td>
                         </tr>
                     </tfoot>

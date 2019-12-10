@@ -1,5 +1,7 @@
 import * as $ from 'jquery';
 import { ReceipeFormModule } from './receipe-form-module';
+import { on } from 'cluster';
+import { QuantityProduct } from './../models/quantity-products';
 export class IngredientFormModule {
     //defini l'objet form du document html donc this.form la referrence au formulaire
     private form: JQuery = $('#ingredient-form');
@@ -7,6 +9,8 @@ export class IngredientFormModule {
 
     private addAndContinue: JQuery = $('#add-and-next');
     private addAndStop: JQuery = $('#add-and-close');
+
+    private checkAll: JQuery= $('#select-all');
 
     
 
@@ -37,17 +41,77 @@ export class IngredientFormModule {
             'click',
             (event: any): void => this.addIngredientAndStop(event)
         );
+        this.checkAll.on(
+            'click',
+            (evant: any): void =>this.checkAllCheckBox()
+        );
+        $('tbody').on(
+            'click',
+            '.ingredient-selection',
+            (event: any) =>this.manageSelectAllCheckBox(event)
+        )
+    }
+    private manageSelectAllCheckBox(event: any): any {
+        if($('tbody .ingredient-selection:checked').length == $('tbody tr').length){
+            this.checkAll.prop('checked', true)} else {
+                this.checkAll.prop('checked', false);
+            }
+
+        }
+        //console.log('Try again');
+    private checkAllCheckBox(): void {
+
+        if (this.checkAll.is(':checked')){
+        //console.log("checkall was hicked.");}
+        $('tbody .ingredient-selection').prop('checked', true);
+        }
+        else {
+            $('tbody .ingredient-selection').prop('checked', false);
+          
+        }
+            //console.log('no');}
+    }
+    private addRow(): void{
+        const ingredient: QuantityProduct = this.createObject(); 
+        const tableRow: JQuery = $('<tr>');  //create element in DOM, add html 
+        const checkboxCell: JQuery=$('<td>');
+        // add checkbox to the cell
+        const checkbox: JQuery=$('<input>');
+        checkbox.attr('type', 'checkbox'); 
+        checkbox.addClass('ingredient-selection'); 
+        let tableLength: number =$('aside#receipe-results table tbody tr').length+1; 
+        console.log(`Next checkbox id: ${tableLength}`);
+        checkbox.attr('id', 'ingredient-' + tableLength);
+        checkboxCell.append(checkbox);
+
+        const ingredientTitleCell: JQuery=$('<td>');
+        ingredientTitleCell.html(ingredient.getName());
+        const ingredientQuantityCell: JQuery=$('<td>');
+        ingredientQuantityCell.html(ingredient.getQuantity() + ' '+ ingredient.getUnit());
+        const unitPriceCell: JQuery=$('<td>'); //table divider
+        unitPriceCell.html(ingredient.getUnitPrice().toString());
+
+        //Add cells to row
+        tableRow
+            .append(checkboxCell)
+            .append(ingredientTitleCell)
+            .append(ingredientQuantityCell)
+            .append(unitPriceCell);
+
+        //Add row to tbody
+        $('aside#receipe-results table tbody').append(tableRow); 
     }
     
     private addIngredientAndStop(event: any): void {
+       //add row
+       this.addRow();
         // Reset form...
         this.resetForm();
 
         // Hey Dude, did you think at the span of the legend ?
         // Sure not Hobiwan...
         this.form.children('fieldset').children('legend').children('span').html('');
-
-
+        
         this.form
             .removeClass('fadeInUp')
             .removeClass('animated')
@@ -57,13 +121,15 @@ export class IngredientFormModule {
             this.form.removeClass('animated').removeClass('fadeOutDown');
             this.form.addClass('hidden-form');
         }, 1500);
-
+         //add a row
+         this.addRow();
         // Then reset the previous form... but... don't forget you got a receipe-form-module...
         // So use it
         ReceipeFormModule.resetForm();
     }
     private addIngredient(event: any): void {
-        // Reset form too...
+        this.addRow();
+         // Reset form too...
         this.resetForm();
     }
 
@@ -86,6 +152,24 @@ export class IngredientFormModule {
         // Don't forget to disable buttons... but it's so easy
         $('[addIngredientButton]').attr('disabled', 'disabled');
     }
+
+private createObject(): QuantityProduct{
+    const ingredient: QuantityProduct = new QuantityProduct();
+    //instancier une class = faire un new de la class
+    ingredient.setName($('#ingredient-title').val().toString());
+    ingredient.setBaseUnit($('#base-unit').children('option:selected').val().toString());
+    ingredient.setPrice(parseFloat($('#ingredient-price').val().toString()));
+    ingredient.setQuantity(parseInt($('#ingredient-quantity').val().toString()));
+    ingredient.setUnit($('#target-unit').children('option:selected').val().toString()); 
+    ingredient.setQuantityUnit(parseInt($('#unit-quantity').val().toString())); 
+
+    console.log(JSON.stringify(ingredient));
+
+    //compute the unit price
+    ingredient.setUnitPrice(); 
+    return ingredient;
+
+}
 
  //for in itérable objet, for of énumérable 
     private checkFormFill(event: any): void {

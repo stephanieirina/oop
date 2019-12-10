@@ -29,10 +29,15 @@ export class QuantityProduct extends ProductModel{
       public setQuantity(quantity: number): void{
           this.quantity= quantity;
       }
+      public getQuantity(): number{
+          return this.quantity;
+      }
       public setUnit(unit: string) : void{
           this.unit =unit;
       }
-      
+      public getUnit(): string {
+          return this.unit;
+      }
       /**
        * @var number 
        * pricing of the product
